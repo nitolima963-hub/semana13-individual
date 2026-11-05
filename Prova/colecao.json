@@ -1,0 +1,99 @@
+{
+  "info": {
+    "_postman_id": "3ad1bef4-8975-4442-b95c-41d93b1cda75",
+    "name": "AC4 - Semana 13 - Testes de API",
+    "description": "Coleção simples para a AC4 - Integração Contínua em QA, com três requisições à API JSONPlaceholder.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "01 - Buscar usuário 1",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status deve ser 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "pm.test(\"Usuário retornado deve ter ID 1\", function () {",
+              "    pm.expect(pm.response.json().id).to.eql(1);",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "https://jsonplaceholder.typicode.com/users/1",
+        "description": "Busca um usuário existente e confirma status e identificador."
+      },
+      "response": []
+    },
+    {
+      "name": "02 - Buscar usuário inexistente",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status deve ser 404\", function () {",
+              "    pm.response.to.have.status(404);",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "https://jsonplaceholder.typicode.com/users/999999",
+        "description": "Verifica resposta quando o usuário não existe."
+      },
+      "response": []
+    },
+    {
+      "name": "03 - Criar um post",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status deve ser 201\", function () {",
+              "    pm.response.to.have.status(201);",
+              "});",
+              "pm.test(\"Título deve ser igual ao enviado\", function () {",
+              "    pm.expect(pm.response.json().title).to.eql(\"Post do trio\");",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"title\": \"Post do trio\", \"body\": \"Teste de integração contínua\", \"userId\": 1}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": "https://jsonplaceholder.typicode.com/posts",
+        "description": "Simula criação de post. A JSONPlaceholder não persiste o dado."
+      },
+      "response": []
+    }
+  ]
+}

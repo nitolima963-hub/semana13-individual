@@ -1,0 +1,27 @@
+name: Testes de API
+
+on:
+  push:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  testes-api:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Baixar o repositório
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Instalar Newman
+        run: npm install -g newman
+
+      - name: Rodar a coleção de testes
+        run: newman run colecao.json
