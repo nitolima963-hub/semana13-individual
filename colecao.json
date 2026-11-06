@@ -2,7 +2,7 @@
   "info": {
     "_postman_id": "3ad1bef4-8975-4442-b95c-41d93b1cda75",
     "name": "AC4 - Semana 13 - Testes de API",
-    "description": "Coleção simples para a AC4 - Integração Contínua em QA, com três requisições à API JSONPlaceholder.",
+    "description": "Coleção de testes para a AC4 de Integração Contínua em QA.",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "item": [
@@ -19,6 +19,9 @@
               "});",
               "pm.test(\"Usuário retornado deve ter ID 1\", function () {",
               "    pm.expect(pm.response.json().id).to.eql(1);",
+              "});",
+              "pm.test(\"Usuário deve possuir e-mail\", function () {",
+              "    pm.expect(pm.response.json().email).to.include(\"@\");",
               "});"
             ]
           }
@@ -28,7 +31,7 @@
         "method": "GET",
         "header": [],
         "url": "https://jsonplaceholder.typicode.com/users/1",
-        "description": "Busca um usuário existente e confirma status e identificador."
+        "description": "Busca o usuário 1 e verifica seus dados."
       },
       "response": []
     },
@@ -51,7 +54,7 @@
         "method": "GET",
         "header": [],
         "url": "https://jsonplaceholder.typicode.com/users/999999",
-        "description": "Verifica resposta quando o usuário não existe."
+        "description": "Verifica a resposta para um usuário inexistente."
       },
       "response": []
     },
@@ -91,7 +94,7 @@
           }
         },
         "url": "https://jsonplaceholder.typicode.com/posts",
-        "description": "Simula criação de post. A JSONPlaceholder não persiste o dado."
+        "description": "Simula a criação de um post."
       },
       "response": []
     }
